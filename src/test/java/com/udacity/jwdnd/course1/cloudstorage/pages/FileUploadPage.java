@@ -20,6 +20,9 @@ public class FileUploadPage {
     @FindBy(id="fileUploadBtn")
     private WebElement fileUploadBtn;
 
+    @FindBy(id="nav-notes")
+    private WebElement navNotesBtn;
+
     WebDriver driver;
 
     public FileUploadPage(WebDriver webDriver) {
@@ -56,5 +59,9 @@ public class FileUploadPage {
 
     public int getFileTableSize() {
         return driver.findElements(By.xpath("//table[@id='fileTable']/tbody/tr")).size();
+    }
+
+    public void gotoNotesApp() {
+        navNotesBtn.click();
     }
 }

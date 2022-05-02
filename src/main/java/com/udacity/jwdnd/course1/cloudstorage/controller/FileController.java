@@ -35,6 +35,7 @@ public class FileController {
             return "login";
         }
         model.addAttribute("files", fileUploadService.getFilesByUserId(getLoggedInUser().getUserid()));
+        model.addAttribute("activeTab", "files");
         clearMessages(model);
 
         return "home";
@@ -62,6 +63,7 @@ public class FileController {
             // TODO
         }
         model.addAttribute("files", fileUploadService.getFilesByUserId(getLoggedInUser().getUserid()));
+        model.addAttribute("activeTab", "files");
         return "home";
     }
 
@@ -77,7 +79,7 @@ public class FileController {
         }
 
         model.addAttribute("files", fileUploadService.getFilesByUserId(getLoggedInUser().getUserid()));
-
+        model.addAttribute("activeTab", "files");
         return "home";
     }
 
