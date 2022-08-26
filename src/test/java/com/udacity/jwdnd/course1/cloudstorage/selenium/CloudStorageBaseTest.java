@@ -1,5 +1,6 @@
 package com.udacity.jwdnd.course1.cloudstorage.selenium;
 
+import com.udacity.jwdnd.course1.cloudstorage.mapper.CleanDbMapper;
 import com.udacity.jwdnd.course1.cloudstorage.pages.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterAll;
@@ -7,6 +8,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.server.LocalServerPort;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,6 +28,9 @@ public class CloudStorageBaseTest {
 
     protected String baseUrl;
 
+    @Autowired
+    CleanDbMapper cleanDbMapper;
+
     @BeforeAll
     public static void beforeAll() {
         WebDriverManager.chromedriver().setup();
@@ -34,13 +39,18 @@ public class CloudStorageBaseTest {
 
     @AfterAll
     public static void afterAll() {
-//        webDriver.quit();
-//        webDriver = null;
+        webDriver.close();
+        webDriver.quit();
+        webDriver = null;
     }
 
     @BeforeEach
     public void beforeEach() {
         baseUrl = "http://localhost:" + port;
+        cleanDbMapper.cleanAllCredentials();
+        cleanDbMapper.cleanAllFiles();
+        cleanDbMapper.cleanAllNotes();
+        cleanDbMapper.cleanAllUsers();
     }
 
     protected void signupAndLogin() {
