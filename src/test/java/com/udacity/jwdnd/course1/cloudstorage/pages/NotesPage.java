@@ -64,7 +64,7 @@ public class NotesPage {
 
     public void deleteNote(String title) {
         WebElement deleteBtn = driver.findElement(By.xpath("//table[@id='notesTable']/tbody/tr[th='" + title + "']/td[1]/a"));
-        //WebElement deleteBtn = driver.findElement(By.xpath("//table[@id='notesTable']/tbody/tr[td[2]='" + title + "']/td[1]"));
+        //WebElement deleteBtn = driver.findElement(By.xpath("//table[@id='notesTable']/tbody/tr[td[x2]='" + title + "']/td[1]"));
         deleteBtn.click();
     }
 

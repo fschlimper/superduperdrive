@@ -89,13 +89,6 @@ public class NotesTest extends CloudStorageBaseTest {
         notesPage.addNote(TESTDATA_NOTE_TITLE, TESTDATA_NOTE_DESCRIPTION, wait);
         notesPage.updateNote(TESTDATA_NOTE_TITLE, TESTDATA_NOTE_TITLE_2, TESTDATA_NOTE_DESCRIPTION_2, wait);
         assertEquals("Note with this title already exists.", notesPage.getErrMessage());
-
     }
 
-    private void signupAndLogin() {
-        SignupPage signupPage = createSignupPage();
-        signupPage.createNewUser(TESTDATA_FIRSTNAME, TESTDATA_LASTNAME, TESTDATA_USERNAME, TESTDATA_PASSWORD);
-        LoginPage loginPage = createLoginPage();
-        loginPage.login(TESTDATA_USERNAME, TESTDATA_PASSWORD);
-    }
 }

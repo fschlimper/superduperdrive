@@ -1,9 +1,6 @@
 package com.udacity.jwdnd.course1.cloudstorage.selenium;
 
-import com.udacity.jwdnd.course1.cloudstorage.pages.FileUploadPage;
-import com.udacity.jwdnd.course1.cloudstorage.pages.LoginPage;
-import com.udacity.jwdnd.course1.cloudstorage.pages.NotesPage;
-import com.udacity.jwdnd.course1.cloudstorage.pages.SignupPage;
+import com.udacity.jwdnd.course1.cloudstorage.pages.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -46,6 +43,13 @@ public class CloudStorageBaseTest {
         baseUrl = "http://localhost:" + port;
     }
 
+    protected void signupAndLogin() {
+        SignupPage signupPage = createSignupPage();
+        signupPage.createNewUser(TESTDATA_FIRSTNAME, TESTDATA_LASTNAME, TESTDATA_USERNAME, TESTDATA_PASSWORD);
+        LoginPage loginPage = createLoginPage();
+        loginPage.login(TESTDATA_USERNAME, TESTDATA_PASSWORD);
+    }
+
     protected SignupPage createSignupPage() {
         webDriver.get(baseUrl + "/signup");
         return new SignupPage(webDriver);
@@ -62,7 +66,12 @@ public class CloudStorageBaseTest {
     }
 
     protected NotesPage createNotesPage() {
-        webDriver.get(baseUrl + "/files");
+        webDriver.get(baseUrl + "/notes");
         return new NotesPage(webDriver);
+    }
+
+    protected CredentialsPage createCredentialsPage() {
+        webDriver.get(baseUrl + "/credentials");
+        return new CredentialsPage(webDriver);
     }
 }
